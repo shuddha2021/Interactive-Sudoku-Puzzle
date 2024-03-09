@@ -16,7 +16,7 @@ CSS styles are applied to enhance the visual appeal of the game, providing a cle
 JavaScript handles the game's functionality and logic, including user input, move validation, puzzle solving, and dynamic rendering.
 
 ## How to Play
-- Open the Sudoku Game in a web browser.
+- Open the Sudoku Game in a web browser at [sudoku-peach.vercel.app](https://sudoku-peach.vercel.app).
 - Use your keyboard to input numbers into empty cells.
 - Fill in each cell with a number from 1 to 9 without repeating any number in the same row, column, or 3x3 subgrid.
 - Use the "Solve" button to automatically solve the puzzle if needed.
@@ -27,7 +27,7 @@ JavaScript handles the game's functionality and logic, including user input, mov
 - Web browser with HTML5 support
 
 ### Running the Game
-- Simply open the index.html file in a web browser to play the game.
+- Simply open the index.html file in a web browser to play the game, or visit [sudoku-peach.vercel.app](https://sudoku-peach.vercel.app) to play it online.
 
 ### Modifying the Game
 - Customize the game by adjusting JavaScript code to change puzzle generation, difficulty level, and user interface enhancements.
