@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .sudoku-board {
+            border: 2px solid #000;
+            border-collapse: collapse;
+        }
+
+        .sudoku-board td {
+            border: 1px solid #000;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .sudoku-board .highlight {
+            background-color: #ffcc00;
+        }
+
+        .sudoku-board .fixed {
+            color: #0000cc;
+        }
+
+        .sudoku-board .selected {
+            background-color: #ccffcc;
+        }
+
+        .sudoku-board .error {
+            background-color: #ff6666;
+        }
+
+        .button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<table class="sudoku-board" id="sudokuBoard">
+</table>
+
+<button class="button" onclick="solveSudoku()">Solve</button>
+
+<script>
+    const board = [
+        [5, 3, 0, 0, 7, 0, 0, 0, 0],
+        [6, 0, 0, 1, 9, 5, 0, 0, 0],
+        [0, 9, 8, 0, 0, 0, 0, 6, 0],
+        [8, 0, 0, 0, 6, 0, 0, 0, 3],
+        [4, 0, 0, 8, 0, 3, 0, 0, 1],
+        [7, 0, 0, 0, 2, 0, 0, 0, 6],
+        [0, 6, 0, 0, 0, 0, 2, 8, 0],
+        [0, 0, 0, 4, 1, 9, 0, 0, 5],
+        [0, 0, 0, 0, 8, 0, 0, 7, 9]
+    ];
+
+    const sudokuBoard = document.getElementById('sudokuBoard');
+
+    // Function to initialize the Sudoku board
+    function initializeBoard() {
+        for (let i = 0; i < 9; i++) {
+            const row = document.createElement('tr');
+            for (let j = 0; j < 9; j++) {
+                const cell = document.createElement('td');
+                cell.textContent = board[i][j] === 0 ? '' : board[i][j];
+                cell.setAttribute('contenteditable', 'true');
+                cell.setAttribute('id', `${i}${j}`);
+                cell.addEventListener('input', onCellInput);
+                row.appendChild(cell);
+            }
+            sudokuBoard.appendChild(row);
+        }
+    }
+
+    // Function to handle input in a cell
+    function onCellInput(event) {
+        const cell = event.target;
+        const row = parseInt(cell.id.charAt(0));
+        const col = parseInt(cell.id.charAt(1));
+        const value = parseInt(cell.textContent);
+
+        if (!isNaN(value)) {
+            if (isValidMove(row, col, value)) {
+                board[row][col] = value;
+                cell.classList.remove('error');
+            } else {
+                cell.classList.add('error');
+                cell.textContent = '';
+            }
+        } else {
+            cell.textContent = '';
+        }
+    }
+
+    // Function to check if move is valid
+    function isValidMove(row, col, value) {
+        // Check row and column
+        for (let i = 0; i < 9; i++) {
+            if (board[row][i] === value || board[i][col] === value) {
+                return false;
+            }
+        }
+
+        // Check 3x3 box
+        const startRow = Math.floor(row / 3) * 3;
+        const startCol = Math.floor(col / 3) * 3;
+        for (let i = startRow; i < startRow + 3; i++) {
+            for (let j = startCol; j < startCol + 3; j++) {
+                if (board[i][j] === value) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    // Function to solve Sudoku using backtracking
+    function solveSudoku() {
+        if (solve()) {
+            updateBoard();
+        } else {
+            alert('No solution exists!');
+        }
+    }
+
+    // Recursive function to solve Sudoku
+    function solve() {
+        for (let row = 0; row < 9; row++) {
+            for (let col = 0; col < 9; col++) {
+                if (board[row][col] === 0) {
+                    for (let num = 1; num <= 9; num++) {
+                        if (isValidMove(row, col, num)) {
+                            board[row][col] = num;
+                            if (solve()) {
+                                return true;
+                            }
+                            board[row][col] = 0;
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    // Function to update the Sudoku board
+    function updateBoard() {
+        for (let i = 0; i < 9; i++) {
+            for (let j = 0; j < 9; j++) {
+                const cell = document.getElementById(`${i}${j}`);
+                cell.textContent = board[i][j];
+            }
+        }
+    }
+
+    // Initialize the Sudoku board
+    initializeBoard();
+</script>
+
+</body>
+</html>
