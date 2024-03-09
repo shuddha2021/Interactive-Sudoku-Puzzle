@@ -21,6 +21,9 @@ JavaScript handles the game's functionality and logic, including user input, mov
 - Fill in each cell with a number from 1 to 9 without repeating any number in the same row, column, or 3x3 subgrid.
 - Use the "Solve" button to automatically solve the puzzle if needed.
 
+  <img width="1002" alt="Screenshot 2024-03-09 at 3 24 06 AM" src="https://github.com/shuddha2021/Sudoku-Game/assets/81951239/15063ba9-96ec-4cb7-bce2-7f6ac365f920">
+
+
 ## Development
 
 ### Prerequisites
