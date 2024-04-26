@@ -12,6 +12,8 @@ The game utilizes HTML to structure the Sudoku grid and buttons for user interac
 ### CSS
 CSS styles are applied to enhance the visual appeal of the game, providing a clean and intuitive user interface.
 
+<img width="1154" alt="Screenshot 2024-04-26 at 2 12 28 PM" src="https://github.com/shuddha2021/Interactive-Sudoku-Puzzle/assets/81951239/b8c86980-3185-4479-80b0-26ebdf4152e2">
+
 ### JavaScript
 JavaScript handles the game's functionality and logic, including user input, move validation, puzzle solving, and dynamic rendering.
 
